@@ -2,7 +2,7 @@ import React from "react";
 import Pokemon from "./Pokemon";
 
 const SetPokemonDetails = (props) => {
-  const { details, loading } = props;
+  const { pokemon, loading } = props;
   return (
     <div>
       <div className="pokedex-header">
@@ -12,12 +12,11 @@ const SetPokemonDetails = (props) => {
         <div>Carregando, segura fera...</div>
       ) : (
         <div className="pokedex-grid">
-          {details && details.map((pokemons, index) => {
-            console.log(pokemons);
-            return (
-              <Pokemon key={index} details={details} />
-            )
-          })}
+          {pokemon &&
+            pokemon.slice(0, 1).map((pokemon, index) => {
+              console.log(pokemon);
+              return <Pokemon key={index} pokemon={pokemon} />;
+            })}
         </div>
       )}
     </div>

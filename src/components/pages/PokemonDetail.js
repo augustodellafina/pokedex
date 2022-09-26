@@ -5,18 +5,18 @@ import Navbar from "../Navbar";
 import SetPokemonDetails from "../SetPokemonDetails";
 import { FavoriteProvider } from "../../contexts/favoritesContext";
 
-const favoritesKey = "f"
-const PokemonDetail = ({ match: { params: { name },},
-}) => {
+const favoritesKey = "f";
+const PokemonDetail = (props) => {
   const [loading, setLoading] = useState(false);
   const [pokemon, setPokemons] = useState([]);
   const [favorites, setFavorites] = useState([]);
-  const [details, setDetails] = useState([]);
+
+  const { setPokemon } = props;
 
   const fetchPokemons = async () => {
     try {
       setLoading(true);
-      const data = await getPokemons();
+      const data = await getPokemons(setPokemon);
       const promises = data.results.map(async (pokemon) => {
         return await getPokemonData(pokemon.url);
       });
@@ -28,31 +28,33 @@ const PokemonDetail = ({ match: { params: { name },},
       console.log("fetchPokemons error: ", error);
     }
   };
-  
+
   const loadFavoritePokemons = () => {
-    const pokemons = JSON.parse(window.localStorage.getItem(favoritesKey)) || []
-    setFavorites(pokemons)
-  }
+    const pokemons =
+      JSON.parse(window.localStorage.getItem(favoritesKey)) || [];
+    setFavorites(pokemons);
+  };
 
   useEffect(() => {
-    loadFavoritePokemons()
-  }, [pokemon, setDetails]);
-  
+    loadFavoritePokemons();
+  }, [pokemon]);
+
   useEffect(() => {
     fetchPokemons();
+    // eslint-disable-next-line
   }, []);
 
   const updateFavoritePokemons = (pokemon) => {
-    const updatedFavorites = [...favorites]
-    const favoriteIndex = favorites.indexOf(pokemon)
-    if(favoriteIndex >= 0) {
+    const updatedFavorites = [...favorites];
+    const favoriteIndex = favorites.indexOf(pokemon);
+    if (favoriteIndex >= 0) {
       updatedFavorites.splice(favoriteIndex, 1);
-    }else {
+    } else {
       updatedFavorites.push(pokemon);
     }
-    window.localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites))
+    window.localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);
-  }
+  };
 
   return (
     <FavoriteProvider
@@ -64,13 +66,13 @@ const PokemonDetail = ({ match: { params: { name },},
       <div>
         <Navbar />
         <SetPokemonDetails
-          details={details}
+          pokemon={pokemon}
           loading={loading}
           favotites={favorites}
         />
       </div>
     </FavoriteProvider>
   );
-}
+};
 
 export default PokemonDetail;
