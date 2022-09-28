@@ -1,8 +1,10 @@
-import "./App.css";
 import Home from "./components/pages/Home";
 import Favorites from "./components/pages/Favorites";
 import PokemonDetail from "./components/pages/PokemonDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+// Add style CSS
+import './assets/scss/style.scss';
 
 function App() {
   return (

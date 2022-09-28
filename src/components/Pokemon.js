@@ -3,13 +3,13 @@ import FavoriteContext from "../contexts/favoritesContext";
 import { Link } from "react-router-dom";
 
 const Pokemon = (props) => {
-  const { favoritePokemons, updateFavoritePokemons } =
-    useContext(FavoriteContext);
+  const { favoritePokemons, updateFavoritePokemons } = useContext(FavoriteContext);
   const { pokemon } = props;
   const onHeartClick = () => {
     updateFavoritePokemons(pokemon);
   };
-  const heart = favoritePokemons.includes(pokemon) ? "❤️" : "🖤";
+  const heart = favoritePokemons.includes(pokemon) ? "Remove from favorites" : "Add to favorites";
+  
   return (
     <div className="pokemon-card">
       <Link to={`/pokemon/${pokemon.name}`}>

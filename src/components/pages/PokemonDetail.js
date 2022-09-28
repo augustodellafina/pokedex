@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { getPokemonData, getPokemons } from "../../api";
-import "../../App.css";
+// import "../../assets/scss/PokemonDetail.scss";
 import Navbar from "../Navbar";
 import SetPokemonDetails from "../SetPokemonDetails";
 import { FavoriteProvider } from "../../contexts/favoritesContext";
+import { useParams } from 'react-router-dom';
 
 const favoritesKey = "f";
 const PokemonDetail = (props) => {
@@ -12,6 +13,7 @@ const PokemonDetail = (props) => {
   const [favorites, setFavorites] = useState([]);
 
   const { setPokemon } = props;
+  const _setPokemon = useParams();
 
   const fetchPokemons = async () => {
     try {
@@ -21,14 +23,15 @@ const PokemonDetail = (props) => {
         return await getPokemonData(pokemon.url);
       });
 
-      const results = await Promise.all(promises);
-      setPokemons(results);
+      const response = await Promise.all(promises);
+      const res = response.find((pokemon) => pokemon.name === _setPokemon.name);
+      setPokemons(res);
       setLoading(false);
     } catch (error) {
       console.log("fetchPokemons error: ", error);
     }
   };
-
+  
   const loadFavoritePokemons = () => {
     const pokemons =
       JSON.parse(window.localStorage.getItem(favoritesKey)) || [];
@@ -55,7 +58,7 @@ const PokemonDetail = (props) => {
     window.localStorage.setItem(favoritesKey, JSON.stringify(updatedFavorites));
     setFavorites(updatedFavorites);
   };
-
+  
   return (
     <FavoriteProvider
       value={{

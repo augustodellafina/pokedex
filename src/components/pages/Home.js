@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getPokemonData, getPokemons, searchPokemon } from "../../api";
-import "../../App.css";
+// import "../../App.css";
 import Navbar from "../Navbar";
 import Pokedex from "../Pokedex";
 import Searchbar from "../Searchbar";
