@@ -21,13 +21,7 @@ const SetPokemonDetails = (props) => {
         <div>Carregando, segura fera...</div>
       ) : (
         <div className="pokedex-grid">
-            <Atropos data-atropos-opacity="1" className="pokemon-card">
-              <img
-                data-atropos-opacity="1"
-                data-atropos-offset="-5"
-                src="https://images.unsplash.com/photo-1634729108708-40777a48aa45?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=774&q=80"
-                alt="bride and groom smooching"
-              />
+          <Atropos data-atropos-opacity="1" className="pokemon-card">
             <div className="card-content">
               <div className="pokemon-image-container">
                 <img
