@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { getPokemonData, getPokemons } from "../../api";
-// import "../../assets/scss/PokemonDetail.scss";
 import Navbar from "../Navbar";
 import SetPokemonDetails from "../SetPokemonDetails";
 import { FavoriteProvider } from "../../contexts/favoritesContext";
