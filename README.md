@@ -29,5 +29,5 @@ $ npm start / yarn start
 
 The application will open in the browser on http://localhost:3000
 
-## Live
-<a href="pokedex-psi-rouge.vercel.app">Pokedex online</a>
+## 😎 Live
+<a href="https://pokedex-psi-rouge.vercel.app">Pokedex online</a>
