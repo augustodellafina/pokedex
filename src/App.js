@@ -4,7 +4,7 @@ import PokemonDetail from "./components/pages/PokemonDetail";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 // Add style CSS
-import './assets/scss/style.scss';
+import "./assets/scss/App.scss";
 
 function App() {
   return (
