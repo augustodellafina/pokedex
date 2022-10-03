@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FavoriteContext from "../contexts/favoritesContext";
 import "../assets/js/card_3d_effect";
 import Atropos from "atropos/react";
@@ -20,14 +20,16 @@ import psychic from "../assets/images/psychic.png";
 import rock from "../assets/images/rock.png";
 import steel from "../assets/images/steel.png";
 import water from "../assets/images/water.png";
+import { useParams } from "react-router-dom";
 
 import { IoIosStarOutline, IoIosStar } from "react-icons/io";
 
-const SetPokemonDetails = (props) => {
+const SetPokemonDetails = props => {
   const { pokemon, loading } = props;
 
-  const { favoritePokemons, updateFavoritePokemons } =
-    useContext(FavoriteContext);
+  const { favoritePokemons, updateFavoritePokemons } = useContext(
+    FavoriteContext
+  );
   const onHeartClick = () => {
     updateFavoritePokemons(pokemon);
   };
@@ -49,9 +51,20 @@ const SetPokemonDetails = (props) => {
     </button>
   );
 
+  const _setPokemon = useParams();
+
+  useEffect(() => {
+    const bgDetails = () => {
+      if (_setPokemon.name === pokemon.name) {
+        document.body.classList.add("bg-details");
+      }
+    };
+    bgDetails();
+  });
+
   return (
     <div>
-      <div className="pokedex-header">
+      <div className="pokedex-header container">
         <h2>Pokedex</h2>
       </div>
       {loading ? (
@@ -189,7 +202,7 @@ const SetPokemonDetails = (props) => {
                       <div className="pokemon-attack">
                         Attack
                         {pokemon.stats
-                          ?.filter((pokemon) => pokemon.stat.name === "attack")
+                          ?.filter(pokemon => pokemon.stat.name === "attack")
                           .map((stat, index) => {
                             return (
                               <div
